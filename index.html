@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tonelli Technologies — Sites, Aplicativos, Automações e Chatbots</title>
+<meta name="description" content="A Tonelli Technologies cria sites, aplicativos, automações e chatbots com IA para clínicas, lojas e escritórios que querem atender melhor, vender mais e parar de perder tempo com o repetitivo.">
+<!-- ATENÇÃO: troque tonellitech.com.br pelo domínio real quando registrar -->
+<link rel="canonical" href="https://tonellitech.com.br/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tonelli Technologies">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://tonellitech.com.br/">
+<meta property="og:title" content="Tonelli Technologies — Sites, Aplicativos, Automações e Chatbots">
+<meta property="og:description" content="Sites, aplicativos, automações e chatbots com IA para deixar o seu negócio mais profissional — e muito mais automatizado.">
+<meta property="og:image" content="https://tonellitech.com.br/assets/og-cover.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tonelli Technologies — Sites, Aplicativos, Automações e Chatbots">
+<meta name="twitter:image" content="https://tonellitech.com.br/assets/og-cover.png">
+<meta name="theme-color" content="#060608">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Michroma&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060608;
+  --bg-alt:#0A0A0E;
+  --bg-footer:#050507;
+  --cell:#08080B;
+  --ink:#F4F2EC;
+  --green:#25D366;
+  --green-h:#2BE873;
+  --on-green:#03150A;
+  --mi:'Michroma',sans-serif;
+  --pad-x:clamp(24px,5vw,72px);
+  --pad-y:clamp(70px,8vw,110px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--ink);
+  font-family:'Archivo',sans-serif;font-weight:400;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+img{height:auto} /* atributos width/height ficam só como hint de aspect-ratio */
+button{font-family:inherit;cursor:pointer;background:none;border:none;color:inherit}
+::selection{background:rgba(37,211,102,.3)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
+.container{max-width:1440px;margin-inline:auto;padding-inline:var(--pad-x)}
+section{scroll-margin-top:96px}
+
+.skip{
+  position:absolute;left:16px;top:-60px;z-index:100;
+  background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:8px;
+  font-size:14px;font-weight:600;transition:top .2s;
+}
+.skip:focus{top:16px}
+
+/* ---------- Botões ---------- */
+.btn-wa{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--green);color:var(--on-green);font-weight:700;
+  border-radius:100px;transition:background .2s,transform .2s,box-shadow .2s;
+  font-size:14px;padding:12px 22px;
+}
+.btn-wa:hover{background:var(--green-h);transform:translateY(-1px)}
+.btn-wa:active{transform:scale(.98)}
+.btn-wa.lg{font-size:16px;padding:18px 34px;box-shadow:0 14px 44px rgba(37,211,102,.28)}
+.btn-wa.lg:hover{transform:translateY(-2px)}
+.btn-wa.xl{font-size:17px;padding:20px 40px;box-shadow:0 16px 50px rgba(37,211,102,.3)}
+.btn-ghost{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  border:1px solid rgba(244,242,236,.18);color:rgba(244,242,236,.85);
+  font-size:16px;font-weight:600;padding:17px 32px;border-radius:100px;
+  transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:rgba(244,242,236,.45);color:var(--ink)}
+.link-wa{display:inline-flex;align-items:center;gap:6px;font-size:15px;font-weight:600;color:var(--green)}
+.link-wa:hover{color:var(--green-h)}
+
+/* ---------- Eyebrow ---------- */
+.eyebrow{display:flex;align-items:center;gap:14px}
+.eyebrow.center{justify-content:center}
+.eyebrow i{width:26px;height:1px;background:rgba(244,242,236,.35)}
+.eyebrow span{font-family:var(--mi);font-size:10px;letter-spacing:.32em;color:rgba(244,242,236,.5)}
+h2.sec{
+  margin:22px 0 0;font-size:clamp(29px,22px + 1.7vw,46px);
+  font-weight:600;letter-spacing:-.022em;line-height:1.12;max-width:640px;
+}
+
+/* ---------- Reveal ---------- */
+/* animação (não transition): transitions de hover nos cards sobrescreveriam a do reveal */
+.reveal{opacity:0;transform:translateY(26px)}
+.reveal.in{opacity:1;transform:none;animation:rise .7s cubic-bezier(.19,1,.22,1) backwards}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+
+/* ---------- Header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:50;
+  border-bottom:1px solid transparent;
+  transition:background .3s,border-color .3s,backdrop-filter .3s;
+}
+header.scrolled{
+  background:rgba(6,6,8,.85);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom-color:rgba(244,242,236,.07);
+}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:24px;height:88px}
+.brand{display:flex;align-items:center;gap:16px}
+.brand img{height:34px;width:auto}
+.nav>.btn-wa{white-space:nowrap;flex:none}
+.brand .div{width:1px;height:26px;background:rgba(244,242,236,.18)}
+.brand b{display:block;font-family:var(--mi);font-weight:400;font-size:12px;letter-spacing:.3em;color:var(--ink)}
+.brand small{display:block;font-family:var(--mi);font-size:6.5px;letter-spacing:.52em;color:rgba(244,242,236,.5);margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:14px;font-weight:500;color:rgba(244,242,236,.68);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+#menu-btn{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+
+/* menu mobile (irmão do header — nunca descendente, por causa do backdrop-filter) */
+.overlay{
+  position:fixed;inset:0;z-index:60;background:rgba(6,6,8,.98);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;
+}
+.overlay.open{opacity:1;visibility:visible}
+.overlay a:not(.btn-wa){font-size:20px;font-weight:600;color:rgba(244,242,236,.8);padding:14px 0}
+.overlay a:not(.btn-wa):hover{color:var(--ink)}
+.overlay .btn-wa{margin-top:26px;font-size:15.5px;padding:16px 32px}
+#menu-close{position:absolute;top:10px;right:calc(var(--pad-x) - 11px);width:44px;height:44px;font-size:26px;color:rgba(244,242,236,.7)}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;overflow:hidden;padding:calc(88px + clamp(60px,8vw,110px)) 0 clamp(70px,9vw,130px);text-align:center}
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(90deg,rgba(244,242,236,.028) 0 1px,transparent 1px 119px),
+    repeating-linear-gradient(0deg,rgba(244,242,236,.02) 0 1px,transparent 1px 119px);
+}
+.hero::after{
+  content:"";position:absolute;left:50%;top:-340px;transform:translateX(-50%);
+  width:1100px;height:680px;
+  background:radial-gradient(ellipse at center,rgba(244,242,236,.11),transparent 62%);
+}
+.hero .marca{position:absolute;left:50%;top:70px;transform:translateX(-50%);width:min(540px,120vw);opacity:.05;pointer-events:none}
+.hero .inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.badge{display:inline-flex;align-items:center;gap:14px}
+.badge::before,.badge::after{content:"";width:26px;height:1px;background:rgba(244,242,236,.3)}
+.badge span{font-family:var(--mi);font-size:clamp(7px,.6vw + 5px,9.5px);letter-spacing:.34em;color:rgba(244,242,236,.62)}
+.hero h1{
+  margin:clamp(28px,3.5vw,44px) 0 0;
+  font-size:clamp(38px,24px + 3.75vw,78px);
+  line-height:1.06;font-weight:700;letter-spacing:-.028em;max-width:1000px;
+}
+.hero h1 .l2{color:rgba(244,242,236,.4)}
+.hero h1 span{display:block}
+.hero .lead{
+  margin:clamp(20px,2.6vw,32px) auto 0;
+  font-size:clamp(15px,1.2vw + 11px,18px);line-height:1.7;
+  color:rgba(244,242,236,.6);max-width:660px;text-wrap:pretty;
+}
+.hero-cta{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:clamp(32px,3.6vw,46px);flex-wrap:wrap}
+.hero .note{margin-top:clamp(18px,2vw,26px);font-size:clamp(11.5px,1vw,13px);color:rgba(244,242,236,.38);letter-spacing:.02em}
+.fade-up{opacity:0;transform:translateY(22px);animation:fadeUp .8s ease forwards}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+/* ---------- Serviços ---------- */
+#servicos{padding:var(--pad-y) 0;border-top:1px solid rgba(244,242,236,.06)}
+.svc-head{display:flex;align-items:flex-end;justify-content:space-between;gap:60px;margin-bottom:60px}
+.svc-head p{font-size:16px;line-height:1.7;color:rgba(244,242,236,.55);max-width:380px;text-wrap:pretty}
+.svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.svc{
+  position:relative;
+  background:linear-gradient(180deg,rgba(244,242,236,.05),rgba(244,242,236,.015));
+  border:1px solid rgba(244,242,236,.09);border-radius:18px;padding:36px;
+  transition:border-color .25s,transform .25s;
+}
+.svc:hover{border-color:rgba(244,242,236,.22);transform:translateY(-3px)}
+.svc .icon{
+  width:50px;height:50px;border:1px solid rgba(244,242,236,.14);border-radius:13px;
+  display:flex;align-items:center;justify-content:center;background:rgba(244,242,236,.04);
+}
+.svc .icon svg{width:22px;height:22px;stroke:var(--ink)}
+.svc h3{margin:26px 0 0;font-size:21px;font-weight:600;letter-spacing:-.01em}
+.svc .tag{margin-top:6px;font-size:13.5px;color:rgba(244,242,236,.42);font-weight:500}
+.svc p{margin:14px 0 0;font-size:15.5px;line-height:1.65;color:rgba(244,242,236,.58);text-wrap:pretty}
+.chips{display:flex;gap:8px;margin-top:24px;flex-wrap:wrap}
+.chips span{font-size:12px;color:rgba(244,242,236,.55);border:1px solid rgba(244,242,236,.12);border-radius:100px;padding:5px 12px}
+.svc .hot{
+  position:absolute;top:32px;right:32px;
+  font-family:var(--mi);font-size:8px;letter-spacing:.24em;color:var(--green);
+  border:1px solid rgba(37,211,102,.35);border-radius:100px;padding:7px 12px;
+}
+
+/* ---------- Projetos ---------- */
+#projetos{padding:var(--pad-y) 0;background:var(--bg-alt);border-block:1px solid rgba(244,242,236,.06)}
+#projetos h2{margin-bottom:60px}
+.case{display:flex;gap:56px;align-items:center}
+.frame{
+  flex:none;width:min(780px,100%);
+  background:#0E0E13;border:1px solid rgba(244,242,236,.11);border-radius:16px;
+  overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.frame .bar{
+  display:flex;align-items:center;gap:14px;padding:13px 18px;
+  border-bottom:1px solid rgba(244,242,236,.08);background:rgba(244,242,236,.03);
+}
+.frame .dots{display:flex;gap:6px}
+.frame .dots i{width:9px;height:9px;border-radius:50%;background:rgba(244,242,236,.16)}
+.frame .url{
+  flex:1;max-width:340px;margin:0 auto;text-align:center;
+  font-size:12px;color:rgba(244,242,236,.45);
+  background:rgba(244,242,236,.05);border-radius:7px;padding:6px 14px;
+}
+.frame .sp{width:33px}
+.frame img{width:100%;aspect-ratio:778/440;object-fit:cover;object-position:top}
+.case-info .n{font-family:var(--mi);font-size:9px;letter-spacing:.3em;color:rgba(244,242,236,.45)}
+.case-info h3{margin:18px 0 0;font-size:clamp(23px,2vw + 14px,32px);font-weight:600;letter-spacing:-.015em}
+.case-info p{margin:18px 0 0;font-size:16px;line-height:1.7;color:rgba(244,242,236,.58);max-width:420px;text-wrap:pretty}
+.next-case{margin-top:44px;border:1px dashed rgba(244,242,236,.16);border-radius:14px;padding:24px 28px;max-width:420px}
+.next-case b{display:block;font-size:15px;font-weight:600;color:rgba(244,242,236,.85)}
+.next-case a{display:inline-block;margin-top:8px;font-size:14px;font-weight:600;color:var(--green)}
+.next-case a:hover{color:var(--green-h)}
+
+/* ---------- Processo ---------- */
+#processo{padding:var(--pad-y) 0}
+#processo h2{margin-bottom:70px}
+.steps{position:relative}
+.steps::before{
+  content:"";position:absolute;left:8px;right:8px;top:5px;height:1px;
+  background:linear-gradient(90deg,rgba(244,242,236,.25),rgba(244,242,236,.06));
+}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:44px}
+.step{position:relative}
+.dm{width:11px;height:11px;background:var(--ink);transform:rotate(45deg)}
+.step .dm{margin-bottom:30px}
+.step:nth-child(2) .dm{background:rgba(244,242,236,.7)}
+.step:nth-child(3) .dm{background:rgba(244,242,236,.45)}
+.step:nth-child(4) .dm{background:rgba(244,242,236,.25)}
+.step .et{font-family:var(--mi);font-size:11px;letter-spacing:.2em;color:rgba(244,242,236,.4)}
+.step h3{margin:14px 0 0;font-size:19px;font-weight:600}
+.step p{margin:12px 0 0;font-size:14.5px;line-height:1.65;color:rgba(244,242,236,.55);text-wrap:pretty}
+
+/* ---------- Diferenciais ---------- */
+#diferenciais{padding:var(--pad-y) 0;border-top:1px solid rgba(244,242,236,.06)}
+#diferenciais h2{margin-bottom:56px}
+.diff{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:rgba(244,242,236,.08);
+  border:1px solid rgba(244,242,236,.1);border-radius:18px;overflow:hidden;
+}
+.diff>div{background:var(--cell);padding:36px}
+.diff h3{margin:22px 0 0;font-size:17px;font-weight:600;line-height:1.3}
+.diff p{margin:9px 0 0;font-size:14.5px;line-height:1.6;color:rgba(244,242,236,.52)}
+.diff .dm{width:9px;height:9px}
+
+/* ---------- Fundador ---------- */
+#sobre{padding:var(--pad-y) 0;background:var(--bg-alt);border-block:1px solid rgba(244,242,236,.06)}
+.founder{
+  display:grid;grid-template-columns:minmax(0,400px) 1fr;
+  grid-template-areas:"photo head" "photo body";
+  column-gap:80px;align-items:center;
+}
+.f-head{grid-area:head;align-self:end}
+.f-body{grid-area:body;align-self:start}
+.f-photo{grid-area:photo;position:relative;width:min(400px,100%)}
+.f-photo::before{content:"";position:absolute;inset:-14px;border:1px solid rgba(244,242,236,.1);border-radius:26px}
+.f-photo img.retrato{width:100%;aspect-ratio:5/6;object-fit:cover;border-radius:20px}
+.f-photo .selo{position:absolute;right:-14px;bottom:-24px;height:52px;width:auto;opacity:.9}
+.f-head h2{margin:22px 0 0;font-size:clamp(29px,22px + 1.7vw,46px);font-weight:600;letter-spacing:-.022em;line-height:1.12}
+.f-head .cargo{margin-top:12px;font-family:var(--mi);font-size:9.5px;letter-spacing:.3em;color:rgba(244,242,236,.45)}
+.f-body p{margin:28px 0 0;font-size:16.5px;line-height:1.75;color:rgba(244,242,236,.6);max-width:560px;text-wrap:pretty}
+.f-body p + p{margin-top:18px}
+.f-quote{
+  margin:34px 0 0;padding-left:22px;border-left:2px solid rgba(244,242,236,.25);
+  font-size:19px;font-weight:500;line-height:1.5;color:var(--ink);max-width:520px;
+}
+.f-body .link-wa{margin-top:32px}
+
+/* ---------- Depoimentos ---------- */
+#depoimentos{padding:var(--pad-y) 0}
+#depoimentos h2{margin-bottom:56px}
+.quotes{display:flex;gap:20px}
+.q-big{
+  flex:1.4;display:flex;flex-direction:column;justify-content:space-between;
+  background:linear-gradient(180deg,rgba(244,242,236,.05),rgba(244,242,236,.015));
+  border:1px solid rgba(244,242,236,.09);border-radius:18px;padding:44px;
+}
+.q-big .mark{font-family:var(--mi);font-size:30px;color:rgba(244,242,236,.25);line-height:1}
+.q-big blockquote{margin:14px 0 0;font-size:clamp(16px,1.2vw + 11px,21px);line-height:1.6;font-weight:500;color:var(--ink);text-wrap:pretty}
+.q-col{flex:1;display:flex;flex-direction:column;gap:20px}
+.q-sm{flex:1;background:rgba(244,242,236,.025);border:1px solid rgba(244,242,236,.09);border-radius:18px;padding:32px}
+.q-sm blockquote{margin:0;font-size:15.5px;line-height:1.65;color:rgba(244,242,236,.75);text-wrap:pretty}
+.who{display:flex;align-items:center;gap:14px}
+.who .av{
+  border-radius:50%;flex:none;
+  background:rgba(244,242,236,.08);border:1px solid rgba(244,242,236,.14);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;color:rgba(244,242,236,.7);
+}
+.who b{display:block;font-weight:600}
+.who span{display:block;color:rgba(244,242,236,.45)}
+.q-big .who{margin-top:36px}
+.q-big .av{width:44px;height:44px;font-size:13px}
+.q-big .who b{font-size:14.5px}
+.q-big .who span{font-size:13px}
+.q-sm .who{margin-top:22px}
+.q-sm .av{width:38px;height:38px;font-size:12px}
+.q-sm .who b{font-size:14px}
+.q-sm .who span{font-size:12.5px}
+
+/* ---------- FAQ ---------- */
+#faq{padding:var(--pad-y) 0;border-top:1px solid rgba(244,242,236,.06)}
+.faq-wrap{max-width:860px;margin:0 auto}
+.faq-wrap .head{text-align:center}
+.faq-wrap .head p{margin:18px 0 40px;font-size:16px;color:rgba(244,242,236,.5)}
+.faq{border-top:1px solid rgba(244,242,236,.08)}
+.faq details{border-bottom:1px solid rgba(244,242,236,.08)}
+.faq summary{
+  display:flex;justify-content:space-between;align-items:center;gap:24px;
+  padding:24px 4px;cursor:pointer;list-style:none;
+  font-size:clamp(15px,1vw + 11px,17.5px);font-weight:600;color:var(--ink);line-height:1.4;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"+";flex:none;width:30px;height:30px;
+  border:1px solid rgba(244,242,236,.2);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(244,242,236,.75);font-size:16px;font-weight:400;
+}
+.faq details[open] summary::after{content:"–"}
+.faq .a{padding:0 60px 26px 4px;color:rgba(244,242,236,.6);font-size:15.5px;line-height:1.75}
+
+/* ---------- CTA final ---------- */
+.cta{padding:clamp(70px,9vw,120px) 0 clamp(80px,9.5vw,130px)}
+.cta-card{
+  position:relative;overflow:hidden;text-align:center;
+  border:1px solid rgba(244,242,236,.12);border-radius:26px;
+  padding:clamp(50px,7vw,90px) clamp(26px,4.5vw,60px);
+  background:linear-gradient(180deg,rgba(244,242,236,.045),rgba(244,242,236,.01));
+}
+.cta-card::before{
+  content:"";position:absolute;left:50%;top:-260px;transform:translateX(-50%);
+  width:900px;height:520px;
+  background:radial-gradient(ellipse at center,rgba(244,242,236,.12),transparent 62%);
+}
+.cta-card .inner{position:relative;display:flex;flex-direction:column;align-items:center}
+.cta-card .marca{height:clamp(44px,4.5vw,60px);width:auto}
+.cta-card h2{
+  margin:clamp(26px,3vw,38px) 0 0;
+  font-size:clamp(27px,18px + 2.3vw,50px);
+  font-weight:650;letter-spacing:-.024em;line-height:1.12;max-width:760px;
+}
+.cta-card p{margin:clamp(16px,2vw,24px) 0 0;font-size:clamp(14px,1vw + 10px,17px);line-height:1.7;color:rgba(244,242,236,.58);max-width:600px;text-wrap:pretty}
+.cta-card .btn-wa{margin-top:clamp(30px,3.6vw,44px)}
+.cta-card .note{margin-top:clamp(16px,1.8vw,22px);font-size:clamp(11.5px,1vw,13px);color:rgba(244,242,236,.4)}
+
+/* ---------- Footer ---------- */
+footer{padding:clamp(44px,5vw,64px) 0 44px;border-top:1px solid rgba(244,242,236,.07);background:var(--bg-footer)}
+.f-top{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.f-top img{height:40px;width:auto}
+.f-top img.sm{display:none}
+.f-top nav{display:flex;gap:32px;flex-wrap:wrap}
+.f-top nav a{font-size:13.5px;color:rgba(244,242,236,.55);transition:color .2s}
+.f-top nav a:hover{color:var(--ink)}
+.f-contact{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px}
+.f-contact a{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;color:rgba(244,242,236,.5);transition:color .2s;padding:5px 0}
+.f-contact a:hover{color:var(--green)}
+.f-contact svg{width:15px;height:15px;stroke:rgba(244,242,236,.5)}
+.f-bot{
+  display:flex;align-items:center;justify-content:space-between;gap:16px 40px;flex-wrap:wrap;
+  margin-top:34px;padding-top:26px;border-top:1px solid rgba(244,242,236,.06);
+}
+.f-bot span{font-size:12.5px;color:rgba(244,242,236,.38)}
+.f-bot .mi{font-family:var(--mi);font-size:8px;letter-spacing:.3em;color:rgba(244,242,236,.35)}
+
+/* ---------- WhatsApp flutuante ---------- */
+@keyframes waPulse{
+  0%{box-shadow:0 12px 36px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,.32)}
+  70%{box-shadow:0 12px 36px rgba(37,211,102,.35),0 0 0 18px rgba(37,211,102,0)}
+  100%{box-shadow:0 12px 36px rgba(37,211,102,.35),0 0 0 0 rgba(37,211,102,0)}
+}
+.wa-float{
+  position:fixed;right:30px;bottom:30px;z-index:40;
+  width:62px;height:62px;border-radius:50%;background:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  animation:waPulse 2.8s infinite;
+  opacity:0;visibility:hidden;transform:translateY(16px);
+  transition:opacity .3s,visibility .3s,transform .3s,background .2s;
+}
+.wa-float.show{opacity:1;visibility:visible;transform:none}
+.wa-float:hover{background:var(--green-h)}
+.wa-float svg{width:30px;height:30px;fill:var(--on-green)}
+
+/* ---------- Responsivo ---------- */
+@media (max-width:1280px){
+  /* abaixo disso o frame de 780px esmaga o texto do case ao lado */
+  .case{flex-direction:column;align-items:stretch;gap:36px}
+  .case-info p,.next-case{max-width:none}
+}
+@media (max-width:960px){
+  .nav{height:64px}
+  .brand img{height:26px}
+  .brand b{font-size:10px;letter-spacing:.26em}
+  .brand small{font-size:5.5px;letter-spacing:.46em}
+  .brand .div{display:none}
+  .nav-links,.nav>.btn-wa{display:none}
+  #menu-btn{display:flex}
+  section{scroll-margin-top:72px}
+  .hero{padding-top:calc(64px + 60px)}
+  .hero::before{background-image:
+    repeating-linear-gradient(90deg,rgba(244,242,236,.026) 0 1px,transparent 1px 64px),
+    repeating-linear-gradient(0deg,rgba(244,242,236,.02) 0 1px,transparent 1px 64px)}
+  .hero::after{width:520px;height:360px;top:-180px}
+  .hero .marca{display:none}
+  .badge{gap:9px}
+  .badge::before,.badge::after{width:18px}
+  .badge span{font-size:7px;letter-spacing:.28em;white-space:nowrap}
+  .hero-cta{flex-direction:column;width:100%}
+  .hero-cta .btn-wa,.hero-cta .btn-ghost{width:100%}
+  .eyebrow i{width:22px}
+  .eyebrow span{font-size:8.5px;letter-spacing:.3em}
+  .svc-head{flex-direction:column;align-items:flex-start;gap:12px;margin-bottom:32px}
+  .svc-head p{font-size:14.5px}
+  .svc-grid{grid-template-columns:1fr;gap:14px}
+  .svc{padding:24px;border-radius:16px}
+  .svc .icon{float:left;width:42px;height:42px;border-radius:11px;margin-right:14px}
+  .svc .icon svg{width:19px;height:19px}
+  .svc h3{margin:0;font-size:16.5px;padding-top:2px}
+  .svc .tag{margin-top:3px;font-size:12px}
+  .svc p{clear:both;margin:14px 0 0;font-size:14px}
+  .svc .chips{display:none}
+  .svc .hot{position:static;display:inline-block;margin-bottom:16px;font-size:6.5px;letter-spacing:.2em;padding:6px 9px}
+  #projetos h2,#processo h2,#diferenciais h2,#depoimentos h2{margin-bottom:32px}
+  .frame{border-radius:14px}
+  .frame .bar{gap:10px;padding:10px 14px}
+  .frame .dots{gap:5px}
+  .frame .dots i{width:7px;height:7px}
+  .frame .url{font-size:10.5px;padding:5px 10px;border-radius:6px}
+  .frame .sp{display:none}
+  .steps{padding-left:28px}
+  .steps::before{left:5px;right:auto;top:6px;bottom:6px;width:1px;height:auto;
+    background:linear-gradient(180deg,rgba(244,242,236,.25),rgba(244,242,236,.05))}
+  .steps-grid{grid-template-columns:1fr;gap:36px}
+  .step .dm{position:absolute;left:-28px;top:4px;margin:0;width:10px;height:10px}
+  .step .et{font-size:9px}
+  .step h3{margin-top:8px;font-size:17px}
+  .step p{margin-top:8px;font-size:13.5px}
+  .diff{grid-template-columns:1fr 1fr;border-radius:14px}
+  .diff>div{padding:22px 18px}
+  .diff .dm{width:8px;height:8px}
+  .diff h3{font-size:14px;margin-top:14px}
+  .diff p{font-size:12px;margin-top:6px}
+  .founder{grid-template-columns:1fr;grid-template-areas:"head" "photo" "body"}
+  .f-photo{margin-top:28px;width:min(342px,100%)}
+  .f-photo img.retrato{aspect-ratio:342/320;border-radius:16px}
+  .f-photo .selo{right:12px;bottom:-16px;height:40px}
+  .f-head .cargo{font-size:7.5px;letter-spacing:.26em;margin-top:8px}
+  .f-body p{margin-top:30px;font-size:14.5px}
+  .f-body p + p{margin-top:18px}
+  .f-quote{font-size:16px;padding-left:18px;margin-top:24px}
+  .quotes{flex-direction:column}
+  .q-big{padding:26px}
+  .q-big .who{margin-top:20px}
+  .q-sm{padding:26px}
+  .faq-wrap .head p{margin-bottom:28px}
+  .faq summary{padding:18px 2px}
+  .faq summary::after{width:26px;height:26px;font-size:14px}
+  .faq .a{padding:0 12px 20px 2px;font-size:13.5px}
+  .cta-card{border-radius:20px}
+  .cta-card .btn-wa{width:100%}
+  .f-top{justify-content:center;flex-direction:column;text-align:center}
+  .f-top img.lg{display:none}
+  .f-top img.sm{display:block;height:86px;width:auto}
+  footer{padding-bottom:90px}
+  .f-contact{justify-content:center}
+  .f-bot{justify-content:center;text-align:center;flex-direction:column;gap:10px}
+  .wa-float{right:18px;bottom:18px;width:56px;height:56px}
+  .wa-float svg{width:27px;height:27px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .reveal,.fade-up{opacity:1;transform:none}
+  .wa-float{animation:none}
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#inicio">Pular para o conteúdo</a>
+
+<!-- Header -->
+<header id="header">
+  <div class="container nav">
+    <a class="brand" href="#inicio" aria-label="Tonelli Technologies — início">
+      <img src="assets/tonelli-mark.png" alt="" width="274" height="230">
+      <span class="div"></span>
+      <span><b>TONELLI</b><small>TECHNOLOGIES</small></span>
+    </a>
+    <nav class="nav-links" aria-label="Navegação principal">
+      <a href="#servicos">Serviços</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#processo">Processo</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <!-- ATENÇÃO: troque 5500000000000 pelo número real em TODOS os links wa.me (buscar e substituir) -->
+    <a class="btn-wa" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Chamar no WhatsApp
+    </a>
+    <button id="menu-btn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F4F2EC" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M10 17h10"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- Menu mobile -->
+<div class="overlay" id="menu" aria-hidden="true">
+  <button id="menu-close" aria-label="Fechar menu">×</button>
+  <a href="#servicos">Serviços</a>
+  <a href="#projetos">Projetos</a>
+  <a href="#processo">Processo</a>
+  <a href="#sobre">Sobre</a>
+  <a href="#faq">FAQ</a>
+  <a class="btn-wa" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">Chamar no WhatsApp</a>
+</div>
+
+<main>
+<!-- Hero -->
+<section class="hero" id="inicio">
+  <img class="marca" src="assets/tonelli-mark.png" alt="" aria-hidden="true">
+  <div class="container inner">
+    <div class="badge fade-up"><span>SITES · APPS · CHATBOTS · AUTOMAÇÕES</span></div>
+    <h1>
+      <span class="fade-up" style="animation-delay:.1s">Seu negócio mais profissional.</span>
+      <span class="l2 fade-up" style="animation-delay:.22s">E muito mais automatizado.</span>
+    </h1>
+    <p class="lead fade-up" style="animation-delay:.34s">Criamos sites, aplicativos, automações e chatbots com IA para clínicas, lojas e escritórios que querem atender melhor, vender mais — e parar de perder tempo com o repetitivo.</p>
+    <div class="hero-cta fade-up" style="animation-delay:.46s">
+      <a class="btn-wa lg" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Chamar no WhatsApp
+      </a>
+      <a class="btn-ghost" href="#servicos">Conhecer os serviços</a>
+    </div>
+    <div class="note fade-up" style="animation-delay:.58s">Conversa direta, sem compromisso · Resposta no mesmo dia útil</div>
+  </div>
+</section>
+
+<!-- 01 Serviços -->
+<section id="servicos">
+  <div class="container">
+    <div class="svc-head reveal">
+      <div>
+        <div class="eyebrow"><i></i><span>01 — SERVIÇOS</span></div>
+        <h2 class="sec">Tecnologia sob medida, do site ao atendimento.</h2>
+      </div>
+      <p>Quatro frentes que se completam: presença profissional, operação organizada e atendimento que nunca dorme.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="svc reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4.5" width="18" height="15" rx="2"/><path d="M3 9h18"/><path d="M5.6 6.8h.01M8 6.8h.01" stroke-linecap="round" stroke-width="1.8"/></svg></div>
+        <h3>Sites profissionais</h3>
+        <div class="tag">Seu melhor vendedor, aberto 24 horas.</div>
+        <p>Rápido, elegante e feito para gerar contato — não só para existir. Do domínio ao Google, cuidamos de tudo para você.</p>
+        <div class="chips"><span>Institucional</span><span>Landing pages</span><span>Loja virtual</span></div>
+      </article>
+      <article class="svc reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="7" y="2.5" width="10" height="19" rx="2.6"/><path d="M10.5 18.6h3" stroke-linecap="round"/></svg></div>
+        <h3>Aplicativos</h3>
+        <div class="tag">Sua operação na palma da mão.</div>
+        <p>Apps sob medida para agendar, vender e organizar — simples para o seu cliente, poderoso para a sua equipe.</p>
+        <div class="chips"><span>iOS &amp; Android</span><span>Sistemas web</span></div>
+      </article>
+      <article class="svc reveal">
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="5" cy="12" r="2.1"/><circle cx="19" cy="5.5" r="2.1"/><circle cx="19" cy="18.5" r="2.1"/><path d="M6.9 11.1l10.2-4.7M6.9 12.9l10.2 4.7"/></svg></div>
+        <h3>Automações</h3>
+        <div class="tag">O repetitivo acontece sozinho.</div>
+        <p>Conectamos WhatsApp, planilhas e sistemas para que orçamentos, lembretes e cobranças rodem sem depender de você.</p>
+        <div class="chips"><span>WhatsApp</span><span>Planilhas</span><span>Integrações</span></div>
+      </article>
+      <article class="svc reveal">
+        <div class="hot">MAIS PROCURADO</div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 6.5A2.5 2.5 0 016.5 4h11A2.5 2.5 0 0120 6.5v7a2.5 2.5 0 01-2.5 2.5H9.2L4 20.2z"/><path d="M8.6 10.3h.01M12 10.3h.01M15.4 10.3h.01" stroke-linecap="round" stroke-width="2"/></svg></div>
+        <h3>Chatbots com IA</h3>
+        <div class="tag">Atendimento imediato, todos os dias.</div>
+        <p>Um assistente com IA que responde na hora, agenda horários e encaminha para você apenas o que precisa de gente.</p>
+        <div class="chips"><span>WhatsApp</span><span>Site</span><span>Instagram</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- 02 Projetos -->
+<section id="projetos">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow"><i></i><span>02 — PROJETOS</span></div>
+      <h2 class="sec">Feito pela Tonelli, rodando no mundo real.</h2>
+    </div>
+    <div class="case reveal">
+      <a class="frame" href="https://bitech.com.br" target="_blank" rel="noopener" aria-label="Visitar o site da Bitech Sistemas, projeto da Tonelli">
+        <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="url">bitech.com.br</div><div class="sp"></div></div>
+        <img src="assets/case-bitech.jpg" alt="Página inicial do site da Bitech Sistemas" width="1556" height="880" loading="lazy">
+      </a>
+      <div class="case-info">
+        <div class="n">CASE Nº 01 — SITE INSTITUCIONAL</div>
+        <h3>Bitech Sistemas</h3>
+        <p>Site institucional completo para uma empresa de sistemas de gestão: posicionamento claro, visual profissional e estrutura pensada para transformar visita em contato.</p>
+        <div class="chips"><span>Design &amp; desenvolvimento</span><span>Conteúdo</span><span>Publicação</span></div>
+        <div class="next-case">
+          <b>O próximo case desta página pode ser o seu.</b>
+          <a href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">Começar pelo WhatsApp →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 Processo -->
+<section id="processo">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow"><i></i><span>03 — PROCESSO</span></div>
+      <h2 class="sec">Do primeiro papo ao lançamento, sem mistério.</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="steps-grid">
+        <div class="step">
+          <div class="dm"></div>
+          <div class="et">ETAPA 01</div>
+          <h3>Diagnóstico</h3>
+          <p>Uma conversa para entender seu negócio e onde a tecnologia traz retorno primeiro. Gratuito e sem compromisso.</p>
+        </div>
+        <div class="step">
+          <div class="dm"></div>
+          <div class="et">ETAPA 02</div>
+          <h3>Estratégia &amp; design</h3>
+          <p>Definimos escopo, prazo e investimento — e desenhamos cada tela antes de qualquer linha de código.</p>
+        </div>
+        <div class="step">
+          <div class="dm"></div>
+          <div class="et">ETAPA 03</div>
+          <h3>Desenvolvimento</h3>
+          <p>Construímos com padrão de agência grande e agilidade de time enxuto. Você acompanha tudo de perto.</p>
+        </div>
+        <div class="step">
+          <div class="dm"></div>
+          <div class="et">ETAPA 04</div>
+          <h3>Lançamento &amp; evolução</h3>
+          <p>Publicamos, medimos e seguimos ao seu lado para evoluir o que gera resultado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 Diferenciais -->
+<section id="diferenciais">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow"><i></i><span>04 — DIFERENCIAIS</span></div>
+      <h2 class="sec">Por que empresas escolhem a Tonelli.</h2>
+    </div>
+    <div class="diff reveal">
+      <div><div class="dm"></div><h3>Você fala com quem faz</h3><p>Atendimento direto, sem camadas de intermediários.</p></div>
+      <div><div class="dm"></div><h3>Zero jargão técnico</h3><p>Traduzimos tecnologia em decisões simples de negócio.</p></div>
+      <div><div class="dm"></div><h3>Prazo combinado, prazo cumprido</h3><p>Cronograma claro desde o primeiro dia.</p></div>
+      <div><div class="dm"></div><h3>Design de alto padrão</h3><p>Estética premium que gera confiança no primeiro olhar.</p></div>
+      <div><div class="dm"></div><h3>IA com propósito</h3><p>Automação onde há retorno real — nunca por moda.</p></div>
+      <div><div class="dm"></div><h3>Suporte que continua</h3><p>Depois do lançamento, seguimos por perto.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 Quem está por trás -->
+<section id="sobre">
+  <div class="container">
+    <div class="founder reveal">
+      <div class="f-head">
+        <div class="eyebrow"><i></i><span>05 — QUEM ESTÁ POR TRÁS</span></div>
+        <h2>Gabriel Tonelli</h2>
+        <div class="cargo">FUNDADOR · DESIGN &amp; ENGENHARIA</div>
+      </div>
+      <div class="f-photo">
+        <img class="retrato" src="assets/founder.jpg" alt="Gabriel Tonelli, fundador da Tonelli Technologies" width="800" height="1000" loading="lazy">
+        <img class="selo" src="assets/tonelli-mark.png" alt="" aria-hidden="true">
+      </div>
+      <div class="f-body">
+        <p>Gabriel une design e engenharia para entregar, de ponta a ponta, o que normalmente exigiria uma agência inteira — com a atenção de quem assina o próprio nome no projeto.</p>
+        <p>À frente da Tonelli Technologies, ele acompanha pessoalmente cada etapa: do diagnóstico inicial ao suporte depois do lançamento. É com ele que você fala no WhatsApp — hoje e daqui a um ano.</p>
+        <blockquote class="f-quote">“Tecnologia boa é a que trabalha por você — não o contrário.”</blockquote>
+        <a class="link-wa" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">Falar direto com o Gabriel →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 Depoimentos -->
+<section id="depoimentos">
+  <div class="container">
+    <div class="reveal">
+      <div class="eyebrow"><i></i><span>06 — DEPOIMENTOS</span></div>
+      <h2 class="sec">Quem já trabalhou com a gente.</h2>
+    </div>
+    <div class="quotes">
+      <div class="q-big reveal">
+        <div>
+          <div class="mark">“</div>
+          <blockquote>Profissionalismo do início ao fim. Entenderam o que a gente precisava, entregaram no prazo e o resultado ficou acima do que imaginávamos — hoje o site é o nosso principal cartão de visitas.</blockquote>
+        </div>
+        <div class="who"><span class="av">SP</span><div><b>Nei de Andrade Ferreira Neto</b><span>Bitech</span></div></div>
+      </div>
+      <div class="q-col">
+        <div class="q-sm reveal">
+          <blockquote>“Eu não entendo nada de tecnologia e nunca me senti perdida. Tudo explicado com calma, em português claro.”</blockquote>
+          <div class="who"><span class="av">SP</span><div><b>Isabela Tavares</b><span>Advogada</span></div></div>
+        </div>
+        <div class="q-sm reveal">
+          <blockquote>“O atendimento automático responde em segundos, a qualquer hora do dia. Cliente elogia direto.”</blockquote>
+          <div class="who"><span class="av">SP</span><div><b>João Chamone</b><span>JK Imports</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 FAQ -->
+<section id="faq">
+  <div class="container faq-wrap">
+    <div class="head reveal">
+      <div class="eyebrow center"><i></i><span>07 — FAQ</span><i></i></div>
+      <h2 class="sec" style="max-width:none">Perguntas frequentes</h2>
+      <p>Se a sua não estiver aqui, é só chamar no WhatsApp.</p>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary>Quanto custa um projeto?</summary>
+        <p class="a">Cada projeto é orçado sob medida, de acordo com o escopo. Depois do diagnóstico gratuito, você recebe uma proposta fechada — valor, prazo e entregas claras, sem surpresas no caminho.</p>
+      </details>
+      <details>
+        <summary>Em quanto tempo fica pronto?</summary>
+        <p class="a">Sites costumam levar de 2 a 4 semanas; aplicativos e automações variam conforme a complexidade. O cronograma é definido e combinado antes de começarmos.</p>
+      </details>
+      <details>
+        <summary>Quais são as formas de pagamento? Dá para parcelar?</summary>
+        <p class="a">Sim. Normalmente uma entrada para iniciar e o restante na entrega, com opção de parcelamento no cartão. Tudo detalhado na proposta, sem letra miúda.</p>
+      </details>
+      <details>
+        <summary>Não entendo de tecnologia. Vou conseguir acompanhar?</summary>
+        <p class="a">Vai. Cuidamos de toda a parte técnica e explicamos cada decisão em linguagem simples. Você participa das escolhas que importam para o negócio — o resto é com a gente.</p>
+      </details>
+      <details>
+        <summary>O site é meu? Como funcionam domínio e hospedagem?</summary>
+        <p class="a">É seu, de verdade: domínio registrado no seu nome e todos os acessos entregues a você. Te orientamos sobre os custos fixos, que são baixos e pagos direto aos provedores.</p>
+      </details>
+      <details>
+        <summary>Existe mensalidade?</summary>
+        <p class="a">Cada projeto inclui uma mensalidade que contempla manutenção, servidores e atualizações, com valor combinado conforme as necessidades do cliente.</p>
+      </details>
+      <details>
+        <summary>E depois do lançamento, vocês somem?</summary>
+        <p class="a">Não. Oferecemos planos de manutenção e evolução: monitoramos, ajustamos e melhoramos continuamente, com suporte direto de quem construiu o projeto.</p>
+      </details>
+      <details>
+        <summary>Chatbot não deixa o atendimento frio?</summary>
+        <p class="a">Pelo contrário: o assistente resolve o repetitivo em segundos e encaminha para você o que precisa de atenção humana. Seu cliente é atendido na hora — e você entra só quando importa.</p>
+      </details>
+      <details>
+        <summary>Como a gente começa?</summary>
+        <p class="a">Simples: chame no WhatsApp e conte o que precisa. Marcamos um diagnóstico gratuito, sem compromisso, e você sai com um caminho claro — mesmo que decida não fechar agora.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA final -->
+<section class="cta" id="contato">
+  <div class="container">
+    <div class="cta-card reveal">
+      <div class="inner">
+        <img class="marca" src="assets/tonelli-mark.png" alt="" aria-hidden="true">
+        <h2>Pronto para deixar seu negócio mais profissional?</h2>
+        <p>Chame no WhatsApp e receba um diagnóstico simples e direto do que dá para melhorar — em linguagem que você entende.</p>
+        <a class="btn-wa xl" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          Chamar no WhatsApp agora
+        </a>
+        <div class="note">Atendimento humano · Segunda a sábado, 9h às 19h</div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="f-top">
+      <img class="lg" src="assets/tonelli-horizontal.png" alt="Tonelli Technologies">
+      <img class="sm" src="assets/tonelli-lockup.png" alt="Tonelli Technologies">
+      <nav aria-label="Links do rodapé">
+        <a href="#servicos">Serviços</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#processo">Processo</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+    <div class="f-contact">
+      <!-- ATENÇÃO: confirme e-mail e @ do Instagram reais -->
+      <a href="mailto:contato@tonellitech.com.br">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7L22 7"/></svg>
+        contato@tonellitech.com.br
+      </a>
+      <a href="https://instagram.com/tonellitechnologies" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg>
+        @tonellitechnologies
+      </a>
+    </div>
+    <div class="f-bot">
+      <!-- ATENÇÃO: troque pelo CNPJ real -->
+      <span>© 2026 Tonelli Technologies · CNPJ 62.207.419/0001-76</span>
+      <span class="mi">SITES · APPS · CHATBOTS · AUTOMAÇÕES</span>
+      <span>Este site foi desenhado e desenvolvido pela própria Tonelli.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante -->
+<a id="wa-float" class="wa-float" href="https://wa.me/5500000000000?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Tonelli%20e%20quero%20deixar%20meu%20neg%C3%B3cio%20mais%20profissional." target="_blank" rel="noopener" aria-label="Conversar no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+// Header + WhatsApp flutuante no scroll
+const header=document.getElementById('header');
+const waFloat=document.getElementById('wa-float');
+addEventListener('scroll',()=>{
+  header.classList.toggle('scrolled',scrollY>30);
+  waFloat.classList.toggle('show',scrollY>innerHeight*.6);
+},{passive:true});
+
+// Menu mobile (overlay é irmão do header)
+const menu=document.getElementById('menu');
+const btn=document.getElementById('menu-btn');
+function setMenu(open){
+  menu.classList.toggle('open',open);
+  menu.setAttribute('aria-hidden',!open);
+  btn.setAttribute('aria-expanded',open);
+  document.body.style.overflow=open?'hidden':'';
+  if(open)setTimeout(()=>menu.querySelector('a').focus(),320);
+}
+btn.addEventListener('click',()=>setMenu(true));
+document.getElementById('menu-close').addEventListener('click',()=>{setMenu(false);btn.focus();});
+menu.addEventListener('click',e=>{if(e.target.tagName==='A')setMenu(false);});
+addEventListener('keydown',e=>{
+  if(!menu.classList.contains('open'))return;
+  if(e.key==='Escape'){setMenu(false);btn.focus();return;}
+  if(e.key!=='Tab')return; // trap global: Tab nunca sai do menu aberto
+  const f=menu.querySelectorAll('a,button'),first=f[0],last=f[f.length-1];
+  if(!menu.contains(document.activeElement)){e.preventDefault();first.focus();}
+  else if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}
+  else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}
+});
+addEventListener('resize',()=>{if(innerWidth>960&&menu.classList.contains('open'))setMenu(false);},{passive:true});
+
+// Reveal com cascata entre irmãos
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>{
+  const sibs=[...el.parentElement.children].filter(c=>c.classList.contains('reveal'));
+  if(sibs.length>1)el.style.animationDelay=(sibs.indexOf(el)%6)*80+'ms';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
